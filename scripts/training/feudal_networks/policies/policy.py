@@ -1,5 +1,3 @@
-
-
 class Policy(object):
     """
     An abstract class defining a learned policy to be used for a Reinforcment
@@ -22,26 +20,118 @@ class Policy(object):
                       (e.g. internal LSTM state)
     """
     def __init__(self,obs_space,act_space,config):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         raise NotImplementedError("Please Implement this method")
 
     def _build_model(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         raise NotImplementedError("Please Implement this method")
 
     def _build_placeholders(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         raise NotImplementedError("Please Implement this method")
 
     def _build_loss(self):
-        """
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+
         Should initialize self.loss to be a tensorflow operation that calculates
         the loss funtion for the current policy
         """
         raise NotImplementedError("Please Implement this method")
 
     def act(self, obs, prev_internal):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         raise NotImplementedError("Please Implement this method")
 
     def value(self, obs,prev_internal):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         raise NotImplementedError("Please Implement this method")
 
     def update(self, sess, train_op, batch):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         raise NotImplementedError("Please Implement this method")
+
+

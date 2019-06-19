@@ -3,12 +3,52 @@ import numpy as np
 from collections import namedtuple
 
 def cosine_similarity(u, v):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     return np.dot(np.squeeze(u),np.squeeze(v)) / (np.linalg.norm(u) * np.linalg.norm(v))
 
 Batch = namedtuple("Batch", ["obs", "a", "returns", "s_diff", "ri", "gsum", "features"])
 
 class FeudalBatch(object):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
+
     def __init__(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.obs = []
         self.a = []
         self.returns = []
@@ -18,6 +58,19 @@ class FeudalBatch(object):
         self.features = None
 
     def add(self, obs, a, returns, s_diff, ri, gsum, features):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.obs += [obs]
         self.a += [a]
         self.returns += [returns]
@@ -28,6 +81,19 @@ class FeudalBatch(object):
             self.features = features
 
     def get_batch(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         batch_obs = np.asarray(self.obs)
         batch_a = np.asarray(self.a)
         batch_r = np.asarray(self.returns)
@@ -39,15 +105,53 @@ class FeudalBatch(object):
 
 
 class FeudalBatchProcessor(object):
-    """
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
     This class adapts the batch of PolicyOptimizer to a batch useable by
     the FeudalPolicy.
     """
     def __init__(self, c):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.c = c
         self.last_terminal = True
 
     def _extend(self, batch):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         if self.last_terminal:
             self.last_terminal = False
             self.s = [batch.s[0] for _ in range(self.c)]
@@ -73,7 +177,19 @@ class FeudalBatchProcessor(object):
             self.g.extend([batch.g[-1] for _ in range(self.c)])
 
     def process_batch(self, batch):
-        """
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+
         Converts a normal batch into one used by the FeudalPolicy update.
 
         FeudalPolicy requires a batch of the form:

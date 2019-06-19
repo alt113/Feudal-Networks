@@ -7,11 +7,50 @@ import unittest
 from scripts.training.feudal_networks.envs.vision_maze import VisionMazeEnv
 
 def to_coords(x):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     return list(v[0] for v in np.where(x)[:2])
 
 class TestVisionMaze(unittest.TestCase):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
 
     def test_step(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         maze = VisionMazeEnv(room_length=3, num_rooms_per_side=2)
 
         # up until wall

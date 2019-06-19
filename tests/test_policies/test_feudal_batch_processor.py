@@ -6,8 +6,34 @@ from scripts.training.feudal_networks.policies.feudal_batch_processor import Feu
 from scripts.training.feudal_networks.algos.policy_optimizer import Batch
 
 class TestFeudalBatchProcessor(unittest.TestCase):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
 
     def test_simple_c_1(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         # simple case ignoring the fact that the different list have 
         # elements with different types 
         c = 1
@@ -65,6 +91,19 @@ class TestFeudalBatchProcessor(unittest.TestCase):
         np.testing.assert_array_equal(fb.features, [4,5])
 
     def test_simple_c_2(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         # simple case ignoring the fact that the different list have 
         # elements with different types 
         c = 2
@@ -123,6 +162,19 @@ class TestFeudalBatchProcessor(unittest.TestCase):
         np.testing.assert_array_equal(fb.features, [3,4,5])
 
     def test_simple_terminal_on_start(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         c = 2
         fbp = FeudalBatchProcessor(c)
 
@@ -144,6 +196,19 @@ class TestFeudalBatchProcessor(unittest.TestCase):
         np.testing.assert_array_equal(fb.features, [1,2])
 
     def test_intrinsic_reward_and_gsum_calculation(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         c = 2
         fbp = FeudalBatchProcessor(c)
 

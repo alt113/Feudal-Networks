@@ -1,6 +1,3 @@
-
-import gym
-import numpy as np
 import tensorflow as tf
 
 from scripts.training.feudal_networks.models.models import (linear, conv2d, build_lstm,
@@ -10,7 +7,34 @@ import scripts.training.feudal_networks.policies.policy_utils as policy_utils
 from scripts.training.feudal_networks.policies.configs.lstm_config import config
 
 class LSTMPolicy(object):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
+
     def __init__(self, obs_space, act_space,global_step):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.global_step = global_step
         self.obs_space = obs_space
         self.act_space = act_space
@@ -85,16 +109,68 @@ class LSTMPolicy(object):
         self.summary_op = tf.summary.merge_all()
 
     def get_initial_features(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         return self.state_init
 
     def act(self, ob, c, h):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         sess = tf.get_default_session()
         return sess.run([self.sample, self.vf] + self.state_out,
                         {self.obs: [ob], self.state_in[0]: c, self.state_in[1]: h})
 
     def value(self, ob, c, h):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         sess = tf.get_default_session()
         return sess.run(self.vf, {self.obs: [ob], self.state_in[0]: c, self.state_in[1]: h})[0]
 
     def update_batch(self,batch):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         return batch

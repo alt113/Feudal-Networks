@@ -17,15 +17,68 @@ import gym
 from gym import spaces
 
 class OneRoundDeterministicRewardBoxObsEnv(gym.Env):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
+
     def __init__(self, obs_shape=(64,64,1)):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.action_space = spaces.Discrete(2)
         self.observation_space = spaces.Box(low=0, high=0, shape=obs_shape)
         self._obs = np.zeros(obs_shape)
 
     def _step(self, action):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         assert self.action_space.contains(action)
         reward = 1 if action == 1 else 0
         return self._obs, reward, True, {}
 
     def _reset(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         return self._obs

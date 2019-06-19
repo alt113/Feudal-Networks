@@ -4,7 +4,34 @@ from gym import spaces
 import numpy as np
 
 class VisionMazeEnv(gym.Env):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
+
     def __init__(self, room_length=3, num_rooms_per_side=2):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         assert room_length % 2 == 1, "room_length must be odd"
         assert room_length >= 3, "room_length must be greater than 3"
         assert num_rooms_per_side >= 1, "must have at least 1 room"
@@ -22,11 +49,37 @@ class VisionMazeEnv(gym.Env):
         self._reset()
 
     def _get_obs(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self._obs.fill(0)
         self._obs[self.state[0], self.state[1], :] = 1
         return self._obs
 
     def _reset(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         # start in random state in the maze
         x = np.random.randint(self.max_pos)
         y = np.random.randint(self.max_pos)
@@ -34,6 +87,19 @@ class VisionMazeEnv(gym.Env):
         return self._get_obs()
 
     def _step(self, a):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         assert self.action_space.contains(a)
         x, y = self.state
 
@@ -58,6 +124,19 @@ class VisionMazeEnv(gym.Env):
         return self._get_obs(), r, done, {}
 
     def _step_up(self, x, y):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         ny = y + 1
 
         # convert to single room format
@@ -74,6 +153,19 @@ class VisionMazeEnv(gym.Env):
         return ny
 
     def _step_right(self, x, y):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         nx = x + 1
 
         # convert to single room format
@@ -89,7 +181,20 @@ class VisionMazeEnv(gym.Env):
         nx = min(nx, self.max_pos)
         return nx
 
-    def _step_down(self, x, y):        
+    def _step_down(self, x, y):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         ny = y - 1
 
         # convert to single room format
@@ -106,6 +211,19 @@ class VisionMazeEnv(gym.Env):
         return ny
 
     def _step_left(self, x, y):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         nx = x - 1
 
         # convert to single room format

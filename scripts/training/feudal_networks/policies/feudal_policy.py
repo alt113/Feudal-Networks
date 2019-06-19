@@ -11,11 +11,36 @@ from scripts.training.feudal_networks.policies.configs.feudal_config import conf
 from scripts.training.feudal_networks.policies.feudal_batch_processor import FeudalBatchProcessor
 
 class FeudalPolicy(policy.Policy):
-    """
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
     Policy of the Feudal network architecture.
     """
 
     def __init__(self, obs_space, act_space,global_step):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.global_step = global_step
         self.obs_space = obs_space
         self.act_space = act_space
@@ -27,7 +52,19 @@ class FeudalPolicy(policy.Policy):
         self._build_model()
 
     def _build_model(self):
-        """
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+
         Builds the manager and worker models.
         """
         with tf.variable_scope('FeUdal'):
@@ -55,6 +92,19 @@ class FeudalPolicy(policy.Policy):
         #     print v
 
     def _build_placeholders(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         #standard for all policies
         self.obs = tf.placeholder(tf.float32, [None] + list(self.obs_space))
         self.r = tf.placeholder(tf.float32,(None,))
@@ -68,6 +118,19 @@ class FeudalPolicy(policy.Policy):
 
 
     def _build_perception(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         conv1 = tf.layers.conv2d(inputs=self.obs,
                                 filters=16,
                                 kernel_size=[8, 8],
@@ -85,6 +148,19 @@ class FeudalPolicy(policy.Policy):
                                 activation=tf.nn.elu)
 
     def _build_manager(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         with tf.variable_scope('manager'):
             # Calculate manager internal state
             self.s = tf.layers.dense(inputs=self.z,\
@@ -103,6 +179,19 @@ class FeudalPolicy(policy.Policy):
             # self.manager_vf = tf.Print(self.manager_vf,[self.manager_vf])
 
     def _build_worker(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         with tf.variable_scope('worker'):
             num_acts = self.act_space
 
@@ -135,6 +224,19 @@ class FeudalPolicy(policy.Policy):
                 tf.reshape(logits,[-1,num_acts]), num_acts)[0, :]
 
     def _build_value(self,input):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         with tf.variable_scope('VF'):
             hidden = tf.layers.dense(inputs=input,\
                                 units=self.config.vf_hidden_size,\
@@ -144,6 +246,19 @@ class FeudalPolicy(policy.Policy):
             return tf.matmul(hidden,w)
 
     def _build_loss(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         cutoff_vf_manager = tf.reshape(tf.stop_gradient(self.manager_vf),[-1])
         dot = tf.reduce_sum(tf.multiply(self.s_diff,self.g ),axis=1)
         gcut = tf.stop_gradient(self.g)
@@ -191,10 +306,36 @@ class FeudalPolicy(policy.Policy):
 
 
     def get_initial_features(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         return np.zeros((1,1,self.g_dim),np.float32),self.worker_lstm.state_init+self.manager_lstm.state_init
 
 
     def act(self, ob, g,cw,hw,cm,hm):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         sess = tf.get_default_session()
         return sess.run([self.sample, self.manager_vf, self.g, self.s, self.last_c_g] + self.state_out,
                         {self.obs: [ob], self.state_in[0]: cw, self.state_in[1]: hw,\
@@ -202,6 +343,19 @@ class FeudalPolicy(policy.Policy):
                          self.prev_g: g})
 
     def value(self, ob, g, cw, hw, cm, hm):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         sess = tf.get_default_session()
         return sess.run(self.manager_vf,
                         {self.obs: [ob], self.state_in[0]: cw, self.state_in[1]: hw,\
@@ -209,4 +363,17 @@ class FeudalPolicy(policy.Policy):
                          self.prev_g: g})[0]
 
     def update_batch(self,batch):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         return self.batch_processor.process_batch(batch)

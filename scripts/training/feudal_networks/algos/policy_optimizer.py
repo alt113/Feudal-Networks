@@ -13,12 +13,37 @@ from scripts.training.feudal_networks.policies.lstm_policy import LSTMPolicy
 from scripts.training.feudal_networks.policies.feudal_policy import FeudalPolicy
 
 def discount(x, gamma):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     return scipy.signal.lfilter([1], [1, -gamma], x[::-1], axis=0)[::-1]
 
 def process_rollout(rollout, gamma, lambda_=1.0):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
+    given a rollout, compute its returns and the advantage
     """
-given a rollout, compute its returns and the advantage
-"""
     batch_si = np.asarray(rollout.states)
     batch_a = np.asarray(rollout.actions)
     rewards = np.asarray(rollout.rewards)
@@ -39,11 +64,36 @@ given a rollout, compute its returns and the advantage
 Batch = namedtuple("Batch", ["si", "a", "adv", "r", "terminal", "features"])
 
 class PartialRollout(object):
-    """
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
     a piece of a complete rollout.  We run our agent, and process its experience
     once it has processed enough steps.
     """
     def __init__(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.states = []
         self.actions = []
         self.rewards = []
@@ -53,6 +103,19 @@ class PartialRollout(object):
         self.features = []
 
     def add(self, state, action, reward, value, terminal, features):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.states += [state]
         self.actions += [action]
         self.rewards += [reward]
@@ -61,6 +124,19 @@ class PartialRollout(object):
         self.features += [features]
 
     def extend(self, other):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         assert not self.terminal
         self.states.extend(other.states)
         self.actions.extend(other.actions)
@@ -71,12 +147,37 @@ class PartialRollout(object):
         self.features.extend(other.features)
 
 class RunnerThread(threading.Thread):
-    """
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
     One of the key distinctions between a normal environment and a universe environment
     is that a universe environment is _real time_.  This means that there should be a thread
     that would constantly interact with the environment and tell it what to do.  This thread is here.
     """
     def __init__(self, env, policy, num_local_steps, visualise):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         threading.Thread.__init__(self)
         self.queue = queue.Queue(5)
         self.num_local_steps = num_local_steps
@@ -89,15 +190,54 @@ class RunnerThread(threading.Thread):
         self.visualise = visualise
 
     def start_runner(self, sess, summary_writer):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.sess = sess
         self.summary_writer = summary_writer
         self.start()
 
     def run(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         with self.sess.as_default():
             self._run()
 
     def _run(self):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         rollout_provider = env_runner(self.env, self.policy, self.num_local_steps, self.summary_writer, self.visualise)
         while True:
             # the timeout variable exists because apparently, if one worker dies, the other workers
@@ -107,7 +247,19 @@ class RunnerThread(threading.Thread):
             self.queue.put(next(rollout_provider), timeout=600.0)
 
 def env_runner(env, policy, num_local_steps, summary_writer,visualise):
-    """
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
     The logic of the thread runner.  In brief, it constantly keeps on running
     the policy, and as long as the rollout exceeds a certain length, the thread
     runner appends the policy to the queue.
@@ -160,7 +312,34 @@ def env_runner(env, policy, num_local_steps, summary_writer,visualise):
         yield rollout
 
 class PolicyOptimizer(object):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
+
     def __init__(self, env, task, policy,visualise):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.env = env
         self.task = task
 
@@ -211,11 +390,36 @@ class PolicyOptimizer(object):
             self.local_steps = 0
 
     def start(self, sess, summary_writer):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         self.runner.start_runner(sess, summary_writer)
         self.summary_writer = summary_writer
 
     def pull_batch_from_queue(self):
-        """
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+
         self explanatory:  take a rollout from the queue of the thread runner.
         """
         rollout = self.runner.queue.get(timeout=600.0)
@@ -227,7 +431,19 @@ class PolicyOptimizer(object):
         return rollout
 
     def train(self, sess):
-        """
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+
         This first runs the sync op so that the gradients are computed wrt the
         current global weights. It then takes a rollout from the runner's queue,
         converts it to a batch, and passes that batch and the train op to the

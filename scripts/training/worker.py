@@ -1,3 +1,5 @@
+""" Worker.py """
+
 import tensorflow as tf
 import argparse
 import logging
@@ -15,12 +17,52 @@ logger.setLevel(logging.INFO)
 
 # Disables write_meta_graph argument, which freezes entire process and is mostly useless.
 class FastSaver(tf.train.Saver):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
+
     def save(self, sess, save_path, global_step=None, latest_filename=None,
              meta_graph_suffix="meta", write_meta_graph=True):
+        """Create a Gym environment by passing environment id.
+
+        Parameters
+        ----------
+        env_id : str
+            environment id to be registered in Gym
+        client_id : str
+            Client ID
+        remotes : str
+            BLANK
+        kwargs : dict
+            BLANK
+        """
         super(FastSaver, self).save(sess, save_path, global_step, latest_filename,
                                     meta_graph_suffix, False)
 
 def run(args, server):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     env = create_env(args.env_id, client_id=str(args.task), remotes=args.remotes)
     if args.policy == 'lstm':
         trainer = PolicyOptimizer(env, args.task, args.policy,args.visualise)
@@ -91,8 +133,21 @@ def run(args, server):
     logger.info('reached %s steps. worker stopped.', global_step)
 
 def cluster_spec(num_workers, num_ps):
-    """
-More tensorflow setup for data parallelism
+
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
+    More tensorflow setup for data parallelism
 """
     cluster = {}
     port = 12222
@@ -112,9 +167,21 @@ More tensorflow setup for data parallelism
     return cluster
 
 def main(_):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+
+    Setting up Tensorflow for data parallel work
     """
-Setting up Tensorflow for data parallel work
-"""
 
     parser = argparse.ArgumentParser(description=None)
     parser.add_argument('-v', '--verbose', action='count', dest='verbosity', default=0, help='Set verbosity.')

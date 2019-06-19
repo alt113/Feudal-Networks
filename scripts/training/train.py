@@ -1,3 +1,5 @@
+""" train.py """
+
 import argparse
 import os
 import sys
@@ -26,6 +28,19 @@ parser.add_argument('--visualise', action='store_true',
 
 
 def new_cmd(session, name, cmd, mode, logdir, shell):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     if isinstance(cmd, (list, tuple)):
         cmd = " ".join(shlex_quote(str(v)) for v in cmd)
     if mode == 'tmux':
@@ -38,6 +53,19 @@ def new_cmd(session, name, cmd, mode, logdir, shell):
 
 def create_commands(session, num_workers, remotes, env_id, logdir, shell='bash', 
         policy='lstm', mode='tmux', visualise=False):
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     # for launching the TF workers and for launching tensorboard
     base_cmd = [
         'CUDA_VISIBLE_DEVICES=',
@@ -98,6 +126,19 @@ def create_commands(session, num_workers, remotes, env_id, logdir, shell='bash',
 
 
 def run():
+    """Create a Gym environment by passing environment id.
+
+    Parameters
+    ----------
+    env_id : str
+        environment id to be registered in Gym
+    client_id : str
+        Client ID
+    remotes : str
+        BLANK
+    kwargs : dict
+        BLANK
+    """
     args = parser.parse_args()
     cmds, notes = create_commands("a3c", args.num_workers, args.remotes, args.env_id, args.log_dir, policy=args.policy, mode=args.mode, visualise=args.visualise)
     if args.dry_run:
