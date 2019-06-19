@@ -1,10 +1,9 @@
-﻿from envs import create_env
-import gym
+﻿import gym
 import tensorflow as tf
 import numpy as np
 import cv2
 
-from feudal_networks.policies.feudal_policy import FeudalPolicy
+from scripts.training.feudal_networks.policies.feudal_policy import FeudalPolicy
 
 env = gym.make('PongDeterministic-v0')
 

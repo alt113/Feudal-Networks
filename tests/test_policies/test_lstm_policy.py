@@ -1,6 +1,6 @@
 import unittest
 
-from feudal_networks.policies.lstm_policy import LSTMPolicy
+from scripts.training.feudal_networks.policies.lstm_policy import LSTMPolicy
 import tensorflow as tf
 
 class TestLSTMPolicy(unittest.TestCase):

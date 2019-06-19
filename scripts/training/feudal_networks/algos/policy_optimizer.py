@@ -9,8 +9,8 @@ import tensorflow as tf
 import threading
 import six.moves.queue as queue
 
-from feudal_networks.policies.lstm_policy import LSTMPolicy
-from feudal_networks.policies.feudal_policy import FeudalPolicy
+from scripts.training.feudal_networks.policies.lstm_policy import LSTMPolicy
+from scripts.training.feudal_networks.policies.feudal_policy import FeudalPolicy
 
 def discount(x, gamma):
     return scipy.signal.lfilter([1], [1, -gamma], x[::-1], axis=0)[::-1]

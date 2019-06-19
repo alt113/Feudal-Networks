@@ -4,11 +4,11 @@ import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
 
-import feudal_networks.policies.policy as policy
-import feudal_networks.policies.policy_utils as policy_utils
-from feudal_networks.models.models import SingleStepLSTM
-from feudal_networks.policies.configs.feudal_config import config
-from feudal_networks.policies.feudal_batch_processor import FeudalBatchProcessor
+import scripts.training.feudal_networks.policies.policy as policy
+import scripts.training.feudal_networks.policies.policy_utils as policy_utils
+from scripts.training.feudal_networks.models.models import SingleStepLSTM
+from scripts.training.feudal_networks.policies.configs.feudal_config import config
+from scripts.training.feudal_networks.policies.feudal_batch_processor import FeudalBatchProcessor
 
 class FeudalPolicy(policy.Policy):
     """

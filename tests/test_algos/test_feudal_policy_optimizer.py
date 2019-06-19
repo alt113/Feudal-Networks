@@ -3,10 +3,7 @@ import gym
 import unittest
 import tensorflow as tf
 
-from feudal_networks.algos.feudal_policy_optimizer import FeudalPolicyOptimizer
-from feudal_networks.policies.feudal_policy import FeudalPolicy
-
-import feudal_networks.envs.debug_envs
+from scripts.training.feudal_networks.algos.feudal_policy_optimizer import FeudalPolicyOptimizer
 
 class TestFeudalPolicyOptimizer(unittest.TestCase):
 

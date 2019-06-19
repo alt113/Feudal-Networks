@@ -2,8 +2,8 @@
 import numpy as np
 import unittest
 
-from feudal_networks.policies.feudal_batch_processor import FeudalBatchProcessor, FeudalBatch
-from feudal_networks.algos.policy_optimizer import Batch
+from scripts.training.feudal_networks.policies.feudal_batch_processor import FeudalBatchProcessor, FeudalBatch
+from scripts.training.feudal_networks.algos.policy_optimizer import Batch
 
 class TestFeudalBatchProcessor(unittest.TestCase):
 

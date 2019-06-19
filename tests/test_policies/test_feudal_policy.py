@@ -3,7 +3,7 @@ import numpy as np
 np.set_printoptions(suppress=True, precision=6)
 import unittest
 
-from feudal_networks.policies.feudal_policy import FeudalPolicy
+from scripts.training.feudal_networks.policies.feudal_policy import FeudalPolicy
 import tensorflow as tf
 
 class TestFeudalPolicy(unittest.TestCase):

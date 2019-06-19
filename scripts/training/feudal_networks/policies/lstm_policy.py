@@ -3,11 +3,11 @@ import gym
 import numpy as np
 import tensorflow as tf
 
-from feudal_networks.models.models import (linear, conv2d, build_lstm,
+from scripts.training.feudal_networks.models.models import (linear, conv2d, build_lstm,
     normalized_columns_initializer)
-import feudal_networks.policies.policy_utils as policy_utils
+import scripts.training.feudal_networks.policies.policy_utils as policy_utils
 
-from feudal_networks.policies.configs.lstm_config import config
+from scripts.training.feudal_networks.policies.configs.lstm_config import config
 
 class LSTMPolicy(object):
     def __init__(self, obs_space, act_space,global_step):

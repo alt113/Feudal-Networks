@@ -1,15 +1,12 @@
-#!/usr/bin/env python
-import cv2
-import go_vncdriver
 import tensorflow as tf
 import argparse
 import logging
 import sys, signal
 import time
 import os
-from envs import create_env
-from feudal_networks.algos.policy_optimizer import PolicyOptimizer
-from feudal_networks.algos.feudal_policy_optimizer import FeudalPolicyOptimizer
+from scripts.training.envs import create_env
+from scripts.training.feudal_networks.algos.policy_optimizer import PolicyOptimizer
+from scripts.training.feudal_networks.algos.feudal_policy_optimizer import FeudalPolicyOptimizer
 import distutils.version
 use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.LooseVersion('0.12.0')
 

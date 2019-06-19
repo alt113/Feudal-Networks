@@ -14,9 +14,6 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 universe.configure_logging()
 
-# for environments
-import feudal_networks.envs
-
 def create_env(env_id, client_id, remotes, **kwargs):
     spec = gym.spec(env_id)
 

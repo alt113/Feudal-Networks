@@ -4,7 +4,7 @@ import unittest
 
 
 
-from feudal_networks.envs.vision_maze import VisionMazeEnv
+from scripts.training.feudal_networks.envs.vision_maze import VisionMazeEnv
 
 def to_coords(x):
     return list(v[0] for v in np.where(x)[:2])
