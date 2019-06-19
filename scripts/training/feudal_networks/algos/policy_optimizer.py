@@ -64,20 +64,8 @@ def process_rollout(rollout, gamma, lambda_=1.0):
 Batch = namedtuple("Batch", ["si", "a", "adv", "r", "terminal", "features"])
 
 class PartialRollout(object):
-    """Create a Gym environment by passing environment id.
-
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-
-    a piece of a complete rollout.  We run our agent, and process its experience
+    """
+    A piece of a complete rollout.  We run our agent, and process its experience
     once it has processed enough steps.
     """
     def __init__(self):
@@ -147,19 +135,7 @@ class PartialRollout(object):
         self.features.extend(other.features)
 
 class RunnerThread(threading.Thread):
-    """Create a Gym environment by passing environment id.
-
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-
+    """
     One of the key distinctions between a normal environment and a universe environment
     is that a universe environment is _real time_.  This means that there should be a thread
     that would constantly interact with the environment and tell it what to do.  This thread is here.
@@ -247,19 +223,7 @@ class RunnerThread(threading.Thread):
             self.queue.put(next(rollout_provider), timeout=600.0)
 
 def env_runner(env, policy, num_local_steps, summary_writer,visualise):
-    """Create a Gym environment by passing environment id.
-
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-
+    """
     The logic of the thread runner.  In brief, it constantly keeps on running
     the policy, and as long as the rollout exceeds a certain length, the thread
     runner appends the policy to the queue.
@@ -407,19 +371,7 @@ class PolicyOptimizer(object):
         self.summary_writer = summary_writer
 
     def pull_batch_from_queue(self):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
-
+        """
         self explanatory:  take a rollout from the queue of the thread runner.
         """
         rollout = self.runner.queue.get(timeout=600.0)
@@ -431,19 +383,7 @@ class PolicyOptimizer(object):
         return rollout
 
     def train(self, sess):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
-
+        """
         This first runs the sync op so that the gradients are computed wrt the
         current global weights. It then takes a rollout from the runner's queue,
         converts it to a batch, and passes that batch and the train op to the

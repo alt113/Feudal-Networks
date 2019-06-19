@@ -2,25 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9e1e488-e49e-44d4-b26c-81868be78f10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/scripts/training/envs.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/envs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/algos/feudal_policy_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/algos/feudal_policy_optimizer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_batch_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_batch_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_policy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/lstm_policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/lstm_policy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/runner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/worker.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/worker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_algos/test_feudal_policy_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_algos/test_feudal_policy_optimizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_envs/test_vision_maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_envs/test_vision_maze.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_policies/test_feudal_batch_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_policies/test_feudal_batch_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_policies/test_feudal_policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_policies/test_feudal_policy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_policies/test_lstm_policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_policies/test_lstm_policy.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,15 +20,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/run_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="255">
+                <caret line="17" column="45" lean-forward="true" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>FeudalPolicy</find>
+      <find>build_lstm</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,8 +49,6 @@
         <option value="$PROJECT_DIR$/scripts/training/runner.py" />
         <option value="$PROJECT_DIR$/scripts/training/train.py" />
         <option value="$PROJECT_DIR$/scripts/training/worker.py" />
-        <option value="$PROJECT_DIR$/scripts/training/feudal_networks/algos/feudal_policy_optimizer.py" />
-        <option value="$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" />
@@ -71,6 +63,9 @@
         <option value="$PROJECT_DIR$/tests/test_policies/test_feudal_policy.py" />
         <option value="$PROJECT_DIR$/tests/test_policies/test_lstm_policy.py" />
         <option value="$PROJECT_DIR$/tests/run_tests.py" />
+        <option value="$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py" />
+        <option value="$PROJECT_DIR$/scripts/training/feudal_networks/algos/feudal_policy_optimizer.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -91,11 +86,6 @@
             <path>
               <item name="Feudal-Networks" type="b2602c69:ProjectViewProjectNode" />
               <item name="Feudal-Networks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Feudal-Networks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Feudal-Networks" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -179,7 +169,7 @@
       <updated>1560551270051</updated>
       <workItem from="1560551272477" duration="874000" />
       <workItem from="1560793918838" duration="144000" />
-      <workItem from="1560973638563" duration="4480000" />
+      <workItem from="1560973638563" duration="6533000" />
     </task>
     <servers />
   </component>
@@ -195,7 +185,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5498000" />
+    <option name="totallyTimeSpent" value="7551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -228,66 +218,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/configs/lstm_config.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/configs/feudal_config.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file:///anaconda3/envs/Feudal-Networks/lib/python3.7/site-packages/gym/envs/registration.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
           <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/runner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="140" column="7" selection-start-line="140" selection-start-column="7" selection-end-line="140" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/algos/feudal_policy_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6014">
-          <caret line="444" lean-forward="true" selection-start-line="444" selection-end-line="444" />
-          <folding>
-            <element signature="e#151#185#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
-          <folding>
-            <element signature="e#151#185#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -305,61 +239,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="996">
-          <caret line="163" column="11" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_batch_processor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-315">
           <caret line="191" lean-forward="true" selection-start-line="191" selection-end-line="191" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_policy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="377" column="11" selection-start-line="377" selection-start-column="11" selection-end-line="377" selection-end-column="11" />
-          <folding>
-            <element signature="e#1#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/lstm_policy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="174" column="11" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="11" />
-          <folding>
-            <element signature="e#1#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1995">
-          <caret line="133" column="11" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/envs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6090">
-          <caret line="417" column="11" selection-start-line="417" selection-start-column="11" selection-end-line="417" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -414,6 +297,134 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/algos/feudal_policy_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5415">
+          <caret line="361" column="43" selection-start-line="361" selection-start-column="31" selection-end-line="361" selection-end-column="43" />
+          <folding>
+            <element signature="e#151#185#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4755">
+          <caret line="317" column="47" selection-start-line="317" selection-start-column="35" selection-end-line="317" selection-end-column="47" />
+          <folding>
+            <element signature="e#151#185#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1995">
+          <caret line="133" column="11" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/policy_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_policy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="17" lean-forward="true" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding>
+            <element signature="e#1#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/lstm_policy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/configs/feudal_config.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/policies/configs/lstm_config.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/envs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#99#109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-525">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#18#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1695">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#18#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2700">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#19#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="255">
+            <caret line="17" column="45" lean-forward="true" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

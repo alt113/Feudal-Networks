@@ -17,3 +17,7 @@ Since this is based on a deprecated universe-starter-agent, the following depend
 * [opencv-python](https://pypi.python.org/pypi/opencv-python)
 * [numpy](https://pypi.python.org/pypi/numpy)
 * [scipy](https://pypi.python.org/pypi/scipy)
+
+# Contents of Repo
+
+Two models are created and tested inside this repo. One is the Feudal Network and the other is a typical LSTM network. The reason behind this is to be able to benchmark the Feudal Network performance against a regular LSTM ( as was done in https://arxiv.org/abs/1703.01161 ) 

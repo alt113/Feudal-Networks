@@ -42,7 +42,7 @@ def process_rollout(rollout, gamma, lambda_=1.0):
         BLANK
 
     given a rollout, compute its returns and the advantage
-"""
+    """
     batch_si = np.asarray(rollout.states)
     batch_a = np.asarray(rollout.actions)
 
