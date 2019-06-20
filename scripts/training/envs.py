@@ -1,4 +1,9 @@
-""" Class used to create specific environment by calling it's respective generation function. """
+"""
+    ######################################################################################################
+    #               Class of scripts to create the intended environments for training/testing            #
+    ######################################################################################################
+"""
+
 
 import cv2
 from gym.spaces.box import Box
@@ -16,8 +21,10 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 universe.configure_logging()
 
+
 def create_env(env_id, client_id, remotes, **kwargs):
-    """Create a Gym environment by passing environment id.
+    """
+    Function that creates the intended Gym environment
 
     Parameters
     ----------
@@ -43,25 +50,23 @@ def create_env(env_id, client_id, remotes, **kwargs):
         assert "." not in env_id  # universe environments have dots in names.
         return create_atari_env(env_id)
 
+
 def create_feudal_env(env_id, client_id, remotes, **_):
-    """Create a Gym environment by passing environment id.
+    """
+    Function to specifically create an environment for the Feudal Network.
 
     Parameters
     ----------
     env_id : str
         environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
     """
     env = gym.make(env_id)
     return env
 
+
 def create_flash_env(env_id, client_id, remotes, **_):
-    """Create a Gym environment by passing environment id.
+    """
+    Create a Flash environment by passing environment id.
 
     Parameters
     ----------
@@ -101,8 +106,9 @@ def create_flash_env(env_id, client_id, remotes, **_):
                     'fine_quality_level': 50, 'subsample_level': 3})
     return env
 
+
 def create_vncatari_env(env_id, client_id, remotes, **_):
-    """Create a Gym environment by passing environment id.
+    """Create an Atari (rescaled) environment by passing environment id.
 
     Parameters
     ----------
@@ -130,8 +136,10 @@ def create_vncatari_env(env_id, client_id, remotes, **_):
     env.configure(remotes=remotes, start_timeout=15 * 60, fps=fps, client_id=client_id)
     return env
 
+
 def create_atari_env(env_id):
-    """Create a Gym environment by passing environment id.
+    """
+    Create an Atari environment by passing environment id.
 
     Parameters
     ----------
@@ -151,49 +159,36 @@ def create_atari_env(env_id):
     env = Unvectorize(env)
     return env
 
+
 def DiagnosticsInfo(env, *args, **kwargs):
-    """Create a Gym environment by passing environment id.
+    """
+    Function to collection the diagnostic information
 
     Parameters
     ----------
-    env_id : str
+    env : str
         environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
+    args : list
         BLANK
     kwargs : dict
         BLANK
     """
     return vectorized.VectorizeFilter(env, DiagnosticsInfoI, *args, **kwargs)
 
-class DiagnosticsInfoI(vectorized.Filter):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class DiagnosticsInfoI(vectorized.Filter):
+    """
+    Class to collection the diagnostic information
+
     """
     def __init__(self, log_interval=503):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate a diagnostic information object
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        log_interval : int
+            Interval in time to enable logging
         """
         super(DiagnosticsInfoI, self).__init__()
 
@@ -208,18 +203,13 @@ class DiagnosticsInfoI(vectorized.Filter):
         self._last_episode_id = -1
 
     def _after_reset(self, observation):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help reset the environment/
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        observation : object
+            Environmental observation
         """
         logger.info('Resetting environment')
         self._episode_reward = 0
@@ -228,18 +218,19 @@ class DiagnosticsInfoI(vectorized.Filter):
         return observation
 
     def _after_step(self, observation, reward, done, info):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help step forward in time and collect rewards
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        observation : object
+            Environmental observation
+        reward : object
+            Reward
+        done : bool
+            Flag to see if we stop stepping forward
+        info : object
+            Information object
         """
         to_log = {}
         if self._episode_length == 0:
@@ -303,19 +294,15 @@ class DiagnosticsInfoI(vectorized.Filter):
 
         return observation, reward, done, to_log
 
+
 def _process_frame42(frame):
-    """Create a Gym environment by passing environment id.
+    """
+    Private utility function that helps process the frames of the Atari environment.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    frame : object
+        Frame object
     """
     frame = frame[34:34+160, :160]
     # Resize by half, then down to 42x42 (essentially mipmapping). If
@@ -329,71 +316,57 @@ def _process_frame42(frame):
     frame = np.reshape(frame, [42, 42, 1])
     return frame
 
-class AtariRescale42x42(vectorized.ObservationWrapper):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class AtariRescale42x42(vectorized.ObservationWrapper):
+    """
+    Class in charge of rescaling the Atari environment
+
     """
     def __init__(self, env=None):
+        """
+        Instantiate an atari rescaling object
+
+        Parameters
+        ----------
+        env : object
+            Environment object
+        """
         super(AtariRescale42x42, self).__init__(env)
         self.observation_space = Box(0.0, 1.0, [42, 42, 1])
 
     def _observation(self, observation_n):
-        return [_process_frame42(observation) for observation in observation_n]
-
-class FixedKeyState(object):
-    """Create a Gym environment by passing environment id.
-
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-    """
-    def __init__(self, keys):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help processing the frames of the Atari game
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        observation_n : object
+            Observation object
+        """
+        return [_process_frame42(observation) for observation in observation_n]
+
+
+class FixedKeyState(object):
+    """
+    Class for fixed key states
+
+    """
+    def __init__(self, keys):
+        """
+        Instantiate a fixed key state object
+
         """
         self._keys = [keycode(key) for key in keys]
         self._down_keysyms = set()
 
     def apply_vnc_actions(self, vnc_actions):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to apply the VNC actions
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        vnc_actions : object
+            VNC actions to be applied
         """
         for event in vnc_actions:
             if isinstance(event, vnc_spaces.KeyEvent):
@@ -403,18 +376,9 @@ class FixedKeyState(object):
                     self._down_keysyms.discard(event.key)
 
     def to_index(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to translate keys pressed to indices
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         action_n = 0
         for key in self._down_keysyms:
@@ -423,6 +387,7 @@ class FixedKeyState(object):
                 action_n = self._keys.index(key) + 1
                 break
         return action_n
+
 
 class DiscreteToFixedKeysVNCActions(vectorized.ActionWrapper):
     """
@@ -437,18 +402,15 @@ class DiscreteToFixedKeysVNCActions(vectorized.ActionWrapper):
     will have 6 actions: [none, left, right, space, left space, right space]
     """
     def __init__(self, env, keys):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate an object of this class
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        env : object
+            Environment object
+        keys : object
+            Keys
         """
         super(DiscreteToFixedKeysVNCActions, self).__init__(env)
 
@@ -457,18 +419,9 @@ class DiscreteToFixedKeysVNCActions(vectorized.ActionWrapper):
         self.action_space = spaces.Discrete(len(self._actions))
 
     def _generate_actions(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function that generates actions
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         self._actions = []
         uniq_keys = set()
@@ -485,40 +438,39 @@ class DiscreteToFixedKeysVNCActions(vectorized.ActionWrapper):
         self.key_state = FixedKeyState(uniq_keys)
 
     def _action(self, action_n):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function that casts actions to integers.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        action_n : object
+            Action array
         """
 
         # Each action might be a length-1 np.array. Cast to int to
         # avoid warnings.
         return [self._actions[int(action)] for action in action_n]
 
+
 class CropScreen(vectorized.ObservationWrapper):
     """Crops out a [height]x[width] area starting from (top,left) """
 
     def __init__(self, env, height, width, top=0, left=0):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate an object of the class
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        env : object
+            Environment object
+        height : float
+            Height to start cropping
+        width : float
+            Width to start cropping
+        top : int
+            Top reference point for cropping
+        left : int
+            Left reference point for cropping
         """
         super(CropScreen, self).__init__(env)
         self.height = height
@@ -528,35 +480,27 @@ class CropScreen(vectorized.ObservationWrapper):
         self.observation_space = Box(0, 255, shape=(height, width, 3))
 
     def _observation(self, observation_n):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function in charge of returning an observation of the environment
+        based on the crop settings.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        observation_n : object
+            A list of observations
         """
         return [ob[self.top:self.top+self.height, self.left:self.left+self.width, :] if ob is not None else None
                 for ob in observation_n]
 
+
 def _process_frame_flash(frame):
-    """Create a Gym environment by passing environment id.
+    """
+    Private utility function to help process the frames of the environment.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    frame : object
+        Frame object
     """
     frame = cv2.resize(frame, (200, 128))
     frame = frame.mean(2).astype(np.float32)
@@ -564,50 +508,32 @@ def _process_frame_flash(frame):
     frame = np.reshape(frame, [128, 200, 1])
     return frame
 
-class FlashRescale(vectorized.ObservationWrapper):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class FlashRescale(vectorized.ObservationWrapper):
+    """
+    Class in charge of rescaling the Flash environment
+
     """
 
     def __init__(self, env=None):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate an object of this class
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        env : object
+            Environment object
         """
         super(FlashRescale, self).__init__(env)
         self.observation_space = Box(0.0, 1.0, [128, 200, 1])
 
     def _observation(self, observation_n):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help with the processing of observations
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        observation_n : object
+            Observation object
         """
         return [_process_frame_flash(observation) for observation in observation_n]

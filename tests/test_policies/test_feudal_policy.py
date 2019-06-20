@@ -1,76 +1,50 @@
+"""
+    ######################################################################################################
+    #                       Class of scripts to testing Feudal Network policy                            #
+    ######################################################################################################
+"""
+
 
 import numpy as np
-np.set_printoptions(suppress=True, precision=6)
 import unittest
-
 from scripts.training.feudal_networks.policies.feudal_policy import FeudalPolicy
 import tensorflow as tf
 
-class TestFeudalPolicy(unittest.TestCase):
-    """Create a Gym environment by passing environment id.
+np.set_printoptions(suppress=True, precision=6)
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+
+class TestFeudalPolicy(unittest.TestCase):
+    """
+    Class for testing feudal network policy
+
     """
 
     def setUp(self):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
+        Function for initializing the test
+
+        """
+
         # reset graph before each test case
         tf.reset_default_graph()
 
     def test_init(self):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
+        Function for initializing the test
+
+        """
+
         global_step = tf.get_variable("global_step", [], tf.int32,\
                                         initializer=tf.constant_initializer(0, dtype=tf.int32),
                                         trainable=False)
         feudal = FeudalPolicy((80,80,3), 4, global_step)
 
     def test_fit_simple_dataset(self):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
+        Function for initializing the test
+
+        """
+
         with tf.Session() as session:
             global_step = tf.get_variable("global_step", [], tf.int32,\
                                             initializer=tf.constant_initializer(0, dtype=tf.int32),
@@ -131,19 +105,11 @@ class TestFeudalPolicy(unittest.TestCase):
                         loss, policy, vf))
 
     def test_simple_manager_behavior(self):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
+        Function for initializing the test
+
+        """
+
         with tf.Session() as session:
             global_step = tf.get_variable("global_step", [], tf.int32,\
                     initializer=tf.constant_initializer(0, dtype=tf.int32),
@@ -206,7 +172,6 @@ class TestFeudalPolicy(unittest.TestCase):
                 print(U)
                 input()
 
-    
 
 if __name__ == '__main__':
     unittest.main()

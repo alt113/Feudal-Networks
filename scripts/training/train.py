@@ -1,4 +1,9 @@
-""" train.py """
+"""
+    ######################################################################################################
+    #                          Class of scripts to train the Neural Networks                             #
+    ######################################################################################################
+"""
+
 
 import argparse
 import os
@@ -28,17 +33,22 @@ parser.add_argument('--visualise', action='store_true',
 
 
 def new_cmd(session, name, cmd, mode, logdir, shell):
-    """Create a Gym environment by passing environment id.
+    """
+    Function for creating a new command environment to be run during training
 
     Parameters
     ----------
-    env_id : str
+    session : str
         environment id to be registered in Gym
-    client_id : str
+    name : str
         Client ID
-    remotes : str
+    cmd : object
         BLANK
-    kwargs : dict
+    mode : str
+        Mode for training to be run in
+    logdir : object
+        Log directory
+    shell : object
         BLANK
     """
     if isinstance(cmd, (list, tuple)):
@@ -53,18 +63,29 @@ def new_cmd(session, name, cmd, mode, logdir, shell):
 
 def create_commands(session, num_workers, remotes, env_id, logdir, shell='bash', 
         policy='lstm', mode='tmux', visualise=False):
-    """Create a Gym environment by passing environment id.
+    """
+    Function for creating new commands
 
     Parameters
     ----------
-    env_id : str
+    session : object
         environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
+    num_workers : int
+        Number of Workers in Feudal Network
+    remotes : object
         BLANK
-    kwargs : dict
+    env_id : object
+        Environment ID
+    logdir : object
+        Log directory
+    shell : object
         BLANK
+    policy : object
+        Policy to be trained on
+    mode : object
+        BLANK
+    visualise : bool
+        Enable/Disable visualization
     """
     # for launching the TF workers and for launching tensorboard
     base_cmd = [
@@ -126,18 +147,9 @@ def create_commands(session, num_workers, remotes, env_id, logdir, shell='bash',
 
 
 def run():
-    """Create a Gym environment by passing environment id.
+    """
+    Run function for this script file.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
     """
     args = parser.parse_args()
     cmds, notes = create_commands("a3c", args.num_workers, args.remotes, args.env_id, args.log_dir, policy=args.policy, mode=args.mode, visualise=args.visualise)

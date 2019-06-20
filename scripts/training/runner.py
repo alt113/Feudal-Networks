@@ -1,4 +1,10 @@
-﻿""" Runner.py """
+﻿"""
+    ######################################################################################################
+    #                          Class of scripts to run the Neural Networks                               #
+    ######################################################################################################
+"""
+
+
 import gym
 import tensorflow as tf
 import numpy as np
@@ -12,19 +18,15 @@ env = gym.make('PongDeterministic-v0')
 length = 0
 rewards = 0
 
+
 def process_frame42(frame):
-    """Create a Gym environment by passing environment id.
+    """
+    Function for processing the frames
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    frame : object
+        Frame object to be processed
     """
     frame = frame[34:34+160, :160]
     # Resize by half, then down to 42x42 (essentially mipmapping). If
@@ -37,6 +39,7 @@ def process_frame42(frame):
     frame *= (1.0 / 255.0)
     frame = np.reshape(frame, [42, 42, 1])
     return frame
+
 
 with tf.Session() as sess, sess.as_default():
     pi = FeudalPolicy([42, 42, 1], env.action_space.n, 0)

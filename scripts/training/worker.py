@@ -1,4 +1,9 @@
-""" Worker.py """
+"""
+    ######################################################################################################
+    #                          Class of scripts to train the Neural Networks                             #
+    ######################################################################################################
+"""
+
 
 import tensorflow as tf
 import argparse
@@ -15,52 +20,46 @@ use_tf12_api = distutils.version.LooseVersion(tf.VERSION) >= distutils.version.L
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# Disables write_meta_graph argument, which freezes entire process and is mostly useless.
-class FastSaver(tf.train.Saver):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class FastSaver(tf.train.Saver):
+    """
+    Class in charge of saving and writing log and regular data more efficiently.
+
     """
 
     def save(self, sess, save_path, global_step=None, latest_filename=None,
              meta_graph_suffix="meta", write_meta_graph=True):
-        """Create a Gym environment by passing environment id.
+        """
+        Disables write_meta_graph argument, which freezes entire process and is mostly useless.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        sess : object
+            Session object
+        save_path : object
+            Save path
+        global_step : object
+            Global step
+        latest_filename : object
+            Latest filename
+        meta_graph_suffix : object
+            Meta graph suffix
+        write_meta_graph : bool
+            Enable/Disable writing meta graph
         """
         super(FastSaver, self).save(sess, save_path, global_step, latest_filename,
                                     meta_graph_suffix, False)
 
+
 def run(args, server):
-    """Create a Gym environment by passing environment id.
+    """
+    Function to start running
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
+    args : object
         BLANK
-    kwargs : dict
+    server : object
         BLANK
     """
     env = create_env(args.env_id, client_id=str(args.task), remotes=args.remotes)
@@ -71,7 +70,6 @@ def run(args, server):
     else:
         print('Invalid policy type')
         exit(0)
-
 
     # Variable names that start with "local" are not saved in checkpoints.
     if use_tf12_api:
@@ -132,23 +130,18 @@ def run(args, server):
     sv.stop()
     logger.info('reached %s steps. worker stopped.', global_step)
 
-def cluster_spec(num_workers, num_ps):
 
-    """Create a Gym environment by passing environment id.
+def cluster_spec(num_workers, num_ps):
+    """
+    More tensorflow setup for data parallelism
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
+    num_workers : object
+        Number of workers
+    num_ps : object
         BLANK
-    kwargs : dict
-        BLANK
-
-    More tensorflow setup for data parallelism
-"""
+    """
     cluster = {}
     port = 12222
 
@@ -166,21 +159,12 @@ def cluster_spec(num_workers, num_ps):
     cluster['worker'] = all_workers
     return cluster
 
+
 def main(_):
-    """Create a Gym environment by passing environment id.
-
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-
+    """
+    Main function to be called on start up.
     Setting up Tensorflow for data parallel work
+
     """
 
     parser = argparse.ArgumentParser(description=None)
@@ -220,6 +204,7 @@ def main(_):
                                  config=tf.ConfigProto(device_filters=["/job:ps"]))
         while True:
             time.sleep(1000)
+
 
 if __name__ == "__main__":
     tf.app.run()

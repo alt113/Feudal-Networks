@@ -1,55 +1,39 @@
+"""
+    ######################################################################################################
+    #                               Class of scripts to testing vision maze                              #
+    ######################################################################################################
+"""
+
 
 import numpy as np
 import unittest
 
 
-
 from scripts.training.feudal_networks.envs.vision_maze import VisionMazeEnv
 
+
 def to_coords(x):
-    """Create a Gym environment by passing environment id.
+    """
+    Function to convert the passed parameter to coordinates
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
+    x : object
         BLANK
     """
     return list(v[0] for v in np.where(x)[:2])
 
-class TestVisionMaze(unittest.TestCase):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class TestVisionMaze(unittest.TestCase):
+    """
+    Class for testing Vision maze environment
+
     """
 
     def test_step(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Function for initializing the test
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         maze = VisionMazeEnv(room_length=3, num_rooms_per_side=2)
 
@@ -132,6 +116,7 @@ class TestVisionMaze(unittest.TestCase):
         np.testing.assert_array_equal(to_coords(nx), [5,3])
         nx, _, _, _ = maze.step(2) # down
         np.testing.assert_array_equal(to_coords(nx), [5,3])
+
 
 if __name__ == '__main__':
     unittest.main()
