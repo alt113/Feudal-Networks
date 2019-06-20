@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9e1e488-e49e-44d4-b26c-81868be78f10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,20 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="12" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py">
+        <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="184" column="32" selection-start-line="184" selection-start-column="32" selection-end-line="184" selection-end-column="32" />
+            <state relative-caret-position="30">
+              <caret line="2" column="79" selection-start-line="2" selection-start-column="79" selection-end-line="2" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -53,7 +43,6 @@
         <option value="$PROJECT_DIR$/scripts/training/runner.py" />
         <option value="$PROJECT_DIR$/scripts/training/train.py" />
         <option value="$PROJECT_DIR$/scripts/training/worker.py" />
-        <option value="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_batch_processor.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/policies/feudal_policy.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/policies/lstm_policy.py" />
@@ -70,6 +59,7 @@
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/algos/policy_optimizer.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/envs/debug_envs.py" />
         <option value="$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py" />
+        <option value="$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py" />
       </list>
     </option>
   </component>
@@ -114,7 +104,7 @@
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="training" type="462c0819:PsiDirectoryNode" />
               <item name="feudal_networks" type="462c0819:PsiDirectoryNode" />
-              <item name="envs" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -201,7 +191,7 @@
       <workItem from="1560793918838" duration="144000" />
       <workItem from="1560973638563" duration="6533000" />
       <workItem from="1561001102689" duration="288000" />
-      <workItem from="1561001409819" duration="4305000" />
+      <workItem from="1561001409819" duration="5565000" />
     </task>
     <servers />
   </component>
@@ -217,7 +207,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12144000" />
+    <option name="totallyTimeSpent" value="13404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -368,16 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/training/runner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-525">
@@ -452,8 +432,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/envs/vision_maze.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="184" column="32" selection-start-line="184" selection-start-column="32" selection-end-line="184" selection-end-column="32" />
+        <state>
+          <caret selection-end-line="4" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/training/feudal_networks/models/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="79" selection-start-line="2" selection-start-column="79" selection-end-line="2" selection-end-column="79" />
         </state>
       </provider>
     </entry>

@@ -1,24 +1,26 @@
+"""
+    ######################################################################################################
+    #               The purpose of this script is to model the LSTM network                              #
+    ######################################################################################################
+"""
 
 import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
 
+
 def normalized_columns_initializer(std=1.0):
-    """Create a Gym environment by passing environment id.
+    """
+    Higher order function that returns a normalized initializer
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    std : float
+        standard initializer
     """
-    def _initializer(shape, dtype=None, partition_info=None):
-        """Create a Gym environment by passing environment id.
+    def _initializer(shape):  #, dtype=None, partition_info=None):
+        """
+        Private initializer function to be normalized.
 
         Parameters
         ----------
@@ -36,19 +38,23 @@ def normalized_columns_initializer(std=1.0):
         return tf.constant(out)
     return _initializer
 
+
 def linear(x, size, name, initializer=None, bias_init=0):
-    """Create a Gym environment by passing environment id.
+    """
+    Utility linear function of the form f = wx + b; where w = weights and b = biases; these may be matrices.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    x : int
+        set of attributes to be used in linear function calculation
+    size : int
+        size of data to be handled
+    name : str
+        variable name
+    initializer : function
+        initializer function
+    bias_init : int
+        bias initialization value
     """
     w = tf.get_variable(name + "/w", [x.get_shape()[1], size],
         initializer=initializer)
@@ -56,19 +62,29 @@ def linear(x, size, name, initializer=None, bias_init=0):
         initializer=tf.constant_initializer(bias_init))
     return tf.matmul(x, w) + b
 
+
 def conv2d(x, num_filters, name, filter_size=(3, 3), stride=(1, 1), pad="SAME",
         dtype=tf.float32, collections=None):
-    """Create a Gym environment by passing environment id.
+    """
+    2-D convolution function.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
+    x : int
+        set of attributes to be used in the convolution
+    num_filters : int
+        number of filters to be used in convolution
+    name : str
+        variable name
+    filter_size : 2-tuple
+        size of filter to be used in convolution
+    stride : 2-tuple
+        convolution stride
+    pad : str
+        padding used in convolution
+    dtype : datatype
+        tensorflow datatype
+    collections : object
         BLANK
     """
     with tf.variable_scope(name):
@@ -94,19 +110,19 @@ def conv2d(x, num_filters, name, filter_size=(3, 3), stride=(1, 1), pad="SAME",
             collections=collections)
         return tf.nn.conv2d(x, w, stride_shape, pad) + b
 
-def build_lstm(x, size, name, step_size):
-    """Create a Gym environment by passing environment id.
+
+def build_lstm(x, size, step_size):  #, name, step_size):
+    """
+    Function used to build the LSTM Feudal network.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    x : int
+        set of attributes to be used in the network
+    size : int
+        size of LSTM network
+    step_size : str
+        step size of LSTM network
     """
     lstm = rnn.BasicLSTMCell(size, state_is_tuple=True)
 
@@ -133,34 +149,25 @@ def build_lstm(x, size, name, step_size):
     state_out = [lstm_c[:1, :], lstm_h[:1, :]]
     return lstm_outputs, state_init, state_in, state_out
 
-class SingleStepLSTM(object):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class SingleStepLSTM(object):
+    """
+    Class to be used to build the LSTM network.
+
     """
 
     def __init__(self,x,size,step_size):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate a regular LSTM network.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        x : int
+            set of attributes to be used in the network
+        size : int
+            size of the network
+        step_size : int
+            step size of the network
         """
         lstm = rnn.BasicLSTMCell(size, state_is_tuple=True)
 
