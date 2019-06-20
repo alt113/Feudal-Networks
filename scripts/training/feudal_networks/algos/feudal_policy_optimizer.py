@@ -1,6 +1,11 @@
 """
-Much of the code in this file was originally developed as part of the
-universe starter agent: https://github.com/openai/universe-starter-agent
+    ######################################################################################################
+    #               Much of the code in this file was originally developed as part of the                #
+    #                universe starter agent: https://github.com/openai/universe-starter-agent            #
+    ######################################################################################################
+
+    This class serves as the basis for the Feudal Network policy optimizer.
+    -----------------------------------------------------------------------
 """
 from collections import namedtuple
 import numpy as np
@@ -11,43 +16,37 @@ import six.moves.queue as queue
 
 from scripts.training.feudal_networks.policies.feudal_policy import FeudalPolicy
 
+
 def discount(x, gamma):
-    """Create a Gym environment by passing environment id.
+    """
+    The goal of the agent is to maximize the discounted return defined by this function.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    x : int
+        the power to which gamma is raised to
+    gamma : int
+        discount factor
     """
     return scipy.signal.lfilter([1], [1, -gamma], x[::-1], axis=0)[::-1]
 
-def process_rollout(rollout, gamma, lambda_=1.0):
-    """Create a Gym environment by passing environment id.
+
+def process_rollout(rollout, gamma): #, lambda_=1.0):
+    """
+    Given a rollout, compute its returns and the advantage.
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-
-    given a rollout, compute its returns and the advantage
+    rollout : type
+        rollout of the network containing the states and actions
+    gamma : int
+        discount factor
     """
     batch_si = np.asarray(rollout.states)
     batch_a = np.asarray(rollout.actions)
 
-    rewards = np.asarray(rollout.rewards)
-    vpred_t = np.asarray(rollout.values + [rollout.r])
+    # rewards = np.asarray(rollout.rewards)
+    # vpred_t = np.asarray(rollout.values + [rollout.r])
     rewards_plus_v = np.asarray(rollout.rewards + [rollout.r])
     batch_r = discount(rewards_plus_v, gamma)[:-1]
 
@@ -56,39 +55,19 @@ def process_rollout(rollout, gamma, lambda_=1.0):
     features = rollout.features
     return Batch(batch_si, batch_a, batch_r, rollout.terminal,batch_s,batch_g, features)
 
+
 Batch = namedtuple("Batch", ["obs", "a", "returns", "terminal", "s", "g", "features"])
 # Batch = namedtuple("Batch", ["si", "a", "adv", "r", "terminal", "features"])
 
+
 class PartialRollout(object):
-    """Create a Gym environment by passing environment id.
-
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
-
-    a piece of a complete rollout.  We run our agent, and process its experience
+    """
+    A piece of a complete rollout.  We run our agent, and process its experience
     once it has processed enough steps.
     """
     def __init__(self):
-        """Create a Gym environment by passing environment id.
-
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        """
+        Instantiate the partial rollout of the agent.
         """
         self.states = []
         self.actions = []
@@ -100,19 +79,29 @@ class PartialRollout(object):
         self.r = 0.0
         self.terminal = False
 
-    def add(self, state, action, reward, value,g,s, terminal, features):
-        """Create a Gym environment by passing environment id.
+    def add(self, state, action, reward, value, g, s, terminal, features):
+        """
+        Add new values of state, action, reward, value, features, g, s.
+        Set new terminal value to the one passed as a parameter.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
+        state : object
+            new state value in feudal network
+        action : object
+            new action value in feudal network
+        reward : object
+            new reward value in feudal network
+        value : object
+            new value in feudal network
+        g : object
             BLANK
-        kwargs : dict
+        s : object
             BLANK
+        terminal : object
+            new terminal value for feudal network
+        features : object
+            new features in feudal network
         """
         self.states += [state]
         self.actions += [action]
@@ -124,17 +113,12 @@ class PartialRollout(object):
         self.ss += [s]
 
     def extend(self, other):
-        """Create a Gym environment by passing environment id.
+        """
+        Used to extend set of attributes for Feudal Network
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
+        other : object
             BLANK
         """
         assert not self.terminal
@@ -148,37 +132,30 @@ class PartialRollout(object):
         self.terminal = other.terminal
         self.features.extend(other.features)
 
-class RunnerThread(threading.Thread):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class RunnerThread(threading.Thread):
+    """
+    Thread runner class used to optimize Tensorflow training of Feudal Network.
+
 
     One of the key distinctions between a normal environment and a universe environment
     is that a universe environment is _real time_.  This means that there should be a thread
     that would constantly interact with the environment and tell it what to do.  This thread is here.
     """
     def __init__(self, env, policy, num_local_steps, visualise):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate the thread running object for training optimization.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        env : object
+            environment object
+        policy : object
+            policy object
+        num_local_steps : int
+            number of local steps to take
+        visualise : object
+            visualization object
         """
         threading.Thread.__init__(self)
         self.queue = queue.Queue(5)
@@ -192,53 +169,32 @@ class RunnerThread(threading.Thread):
         self.visualise = visualise
 
     def start_runner(self, sess, summary_writer):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to start running the thread.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        sess : object
+            session object to run in
+        summary_writer : object
+            summary writer for logging purposes
         """
         self.sess = sess
         self.summary_writer = summary_writer
         self.start()
 
     def run(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Overridden thread run function that will be called by start() is triggered.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         with self.sess.as_default():
             self._run()
 
     def _run(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private helper run function to handle the queue data efficiently.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         rollout_provider = env_runner(self.env, self.policy, self.num_local_steps, self.summary_writer, self.visualise)
         while True:
@@ -248,23 +204,26 @@ class RunnerThread(threading.Thread):
 
             self.queue.put(next(rollout_provider), timeout=600.0)
 
-def env_runner(env, policy, num_local_steps, summary_writer,visualise):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+def env_runner(env, policy, num_local_steps, summary_writer): #,visualise):
+    """
+    Function to begin running the training environment.
+
 
     The logic of the thread runner.  In brief, it constantly keeps on running
     the policy, and as long as the rollout exceeds a certain length, the thread
     runner appends the policy to the queue.
+
+    Parameters
+    ----------
+    env : object
+        environment object
+    policy : object
+        policy object
+    num_local_steps : object
+        number of local steps to run
+    summary_writer : object
+        summary writer for logging purposes
     """
     last_state = env.reset()
     last_c_g,last_features = policy.get_initial_features()
@@ -322,34 +281,25 @@ def env_runner(env, policy, num_local_steps, summary_writer,visualise):
         # once we have enough experience, yield it, and have the ThreadRunner place it on a queue
         yield rollout
 
-class FeudalPolicyOptimizer(object):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class FeudalPolicyOptimizer(object):
+    """
+    Feudal Network policy optimizer class.
+
     """
 
-    def __init__(self, env, task, policy,visualise):
-        """Create a Gym environment by passing environment id.
+    def __init__(self, env, task, visualise): #policy,visualise):
+        """
+        Instantiate the feudal policy optimizer.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        env : object
+            environment object
+        task : object
+            task object
+        visualise : object
+            visualization object
         """
         self.env = env
         self.task = task
@@ -389,37 +339,23 @@ class FeudalPolicyOptimizer(object):
             self.local_steps = 0
 
     def start(self, sess, summary_writer):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to start running Feudal Network policy optimizer
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        sess : object
+            session to improve policy on
+        summary_writer : object
+            summary object for logging purposes
         """
         self.runner.start_runner(sess, summary_writer)
         self.summary_writer = summary_writer
 
     def pull_batch_from_queue(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Take a rollout from the queue of the thread runner.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
-
-        self explanatory:  take a rollout from the queue of the thread runner.
         """
         rollout = self.runner.queue.get(timeout=600.0)
         while not rollout.terminal:
@@ -430,23 +366,19 @@ class FeudalPolicyOptimizer(object):
         return rollout
 
     def train(self, sess):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to start training Feudal Network to enhance policy at current session.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
 
         This first runs the sync op so that the gradients are computed wrt the
         current global weights. It then takes a rollout from the runner's queue,
         converts it to a batch, and passes that batch and the train op to the
         policy to perform an update.
+
+        Parameters
+        ----------
+        sess : object
+            session object
         """
         # copy weights from shared to local
         # this should be run first so that the updates are for the most
@@ -487,7 +419,6 @@ class FeudalPolicyOptimizer(object):
         for i in range(len(self.policy.state_in)):
             feed_dict[self.policy.state_in[i]] = batch.features[i]
             feed_dict[self.network.state_in[i]] = batch.features[i]
-
 
         fetched = sess.run(fetches, feed_dict=feed_dict)
 
