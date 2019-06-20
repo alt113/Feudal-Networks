@@ -1,53 +1,41 @@
+"""
+    ######################################################################################################
+    #                                    Feudal Network batch data processor script                      #
+    ######################################################################################################
+"""
+
 
 import numpy as np
 from collections import namedtuple
 
+
 def cosine_similarity(u, v):
-    """Create a Gym environment by passing environment id.
+    """
+    Cosine similarity function as is defined here: https://reference.wolfram.com/language/ref/CosineDistance.html
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    u : vector
+        value vector
+    v : vector
+        value vector
     """
     return np.dot(np.squeeze(u),np.squeeze(v)) / (np.linalg.norm(u) * np.linalg.norm(v))
 
+
 Batch = namedtuple("Batch", ["obs", "a", "returns", "s_diff", "ri", "gsum", "features"])
 
-class FeudalBatch(object):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class FeudalBatch(object):
+    """
+    Class to be used for batch data efficient processing in the Feudal Network
+
     """
 
     def __init__(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate a feudal batch data processor
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         self.obs = []
         self.a = []
@@ -58,17 +46,24 @@ class FeudalBatch(object):
         self.features = None
 
     def add(self, obs, a, returns, s_diff, ri, gsum, features):
-        """Create a Gym environment by passing environment id.
+        """
+        Create a Gym environment by passing environment id.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
+        obs : object
+            new observations to be added to feudal network
+        a : object
+            new actions to be added to feudal network
+        returns : object
+            new returns to be added to feudal network
+        s_diff : object
             BLANK
-        kwargs : dict
+        ri : object
+            BLANK
+        gsum : object
+            BLANK
+        features : object
             BLANK
         """
         self.obs += [obs]
@@ -81,18 +76,9 @@ class FeudalBatch(object):
             self.features = features
 
     def get_batch(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Function used to retrieve batch of data
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         batch_obs = np.asarray(self.obs)
         batch_a = np.asarray(self.a)
@@ -103,54 +89,34 @@ class FeudalBatch(object):
         return Batch(batch_obs,batch_a,batch_r,batch_sd,batch_ri,batch_gs,self.features)
 
 
-
 class FeudalBatchProcessor(object):
-    """Create a Gym environment by passing environment id.
+    """
+    Class to processor batch of data in Feudal Network
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
 
-    This class adapts the batch of PolicyOptimizer to a batch useable by
+    This class adapts the batch of PolicyOptimizer to a batch usable by
     the FeudalPolicy.
     """
     def __init__(self, c):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate a feudal batch data processor
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
+        c : object
             BLANK
         """
         self.c = c
         self.last_terminal = True
 
     def _extend(self, batch):
-        """Create a Gym environment by passing environment id.
+        """
+        Private function to help extend the Feudal Network.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        batch : object
+            batch object containing states, goals, observations, actions, and features
         """
         if self.last_terminal:
             self.last_terminal = False
@@ -177,28 +143,21 @@ class FeudalBatchProcessor(object):
             self.g.extend([batch.g[-1] for _ in range(self.c)])
 
     def process_batch(self, batch):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to process the batch of data in the Feudal Network
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
 
         Converts a normal batch into one used by the FeudalPolicy update.
-
         FeudalPolicy requires a batch of the form:
-
         c previous timesteps - batch size timesteps - c future timesteps
-
         This class handles the tracking the leading and following timesteps over
         time. Additionally, it also computes values across timesteps from the
         batch to provide to FeudalPolicy.
+
+        Parameters
+        ----------
+        batch : object
+            batch object containing states, goals, observations, actions, and features
         """
         # extend with current batch
         self._extend(batch)

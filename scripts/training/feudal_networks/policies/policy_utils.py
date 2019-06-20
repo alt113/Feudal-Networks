@@ -1,35 +1,35 @@
+"""
+    ######################################################################################################
+    #                    Script containing utility functions for the Neural Network policy class         #
+    ######################################################################################################
+"""
+
 
 import numpy as np
 import tensorflow as tf
 
+
 def flatten(x):
-    """Create a Gym environment by passing environment id.
+    """
+     Flattening function for the neural network
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+    x : object
+        Layer to be flattened in neural network
     """
     return tf.reshape(x, [-1, np.prod(x.get_shape().as_list()[1:])])
 
+
 def categorical_sample(logits, d):
-    """Create a Gym environment by passing environment id.
+    """
+     Flattening function for the neural network
 
     Parameters
     ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
+    logits : object
+        Log-odd function
+    d : object
         BLANK
     """
     value = tf.squeeze(tf.multinomial(logits - tf.reduce_max(

@@ -1,3 +1,10 @@
+"""
+    ######################################################################################################
+    #                          Script containing the base Neural Network policy class                    #
+    ######################################################################################################
+"""
+
+
 class Policy(object):
     """
     An abstract class defining a learned policy to be used for a Reinforcment
@@ -20,117 +27,80 @@ class Policy(object):
                       (e.g. internal LSTM state)
     """
     def __init__(self,obs_space,act_space,config):
-        """Create a Gym environment by passing environment id.
+        """
+         Instantiate an Neural Network policy object.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        obs_space : object
+            Observation space
+        act_space : object
+            Action space
+        config : object
+            Configuration of the neural network
         """
         raise NotImplementedError("Please Implement this method")
 
     def _build_model(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function that builds models.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         raise NotImplementedError("Please Implement this method")
 
     def _build_placeholders(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function that helps build the network placeholders
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         raise NotImplementedError("Please Implement this method")
 
     def _build_loss(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function that builds losses for models.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
-
-        Should initialize self.loss to be a tensorflow operation that calculates
-        the loss funtion for the current policy
         """
         raise NotImplementedError("Please Implement this method")
 
     def act(self, obs, prev_internal):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to allow the network to start acting based on the environmental
+        observations and previous internal states.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        obs : object
+            Observation object
+        prev_internal : object
+            Previous internal states of the neural network
         """
         raise NotImplementedError("Please Implement this method")
 
-    def value(self, obs,prev_internal):
-        """Create a Gym environment by passing environment id.
+    def value(self, obs, prev_internal):
+        """
+        Value function for the network
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        obs : object
+            Observation object
+        prev_internal : object
+            Previous internal states of the neural network
         """
         raise NotImplementedError("Please Implement this method")
 
     def update(self, sess, train_op, batch):
-        """Create a Gym environment by passing environment id.
+        """
+        Update function for the network
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
+        sess : object
+            Session object
+        train_op : object
             BLANK
-        kwargs : dict
-            BLANK
+        batch : object
+            Batch object of data for the neural network
         """
         raise NotImplementedError("Please Implement this method")
 

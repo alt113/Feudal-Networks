@@ -1,9 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="apple">
     <words>
+      <w>logits</w>
       <w>lstm</w>
       <w>rollout</w>
       <w>tensorflow</w>
+      <w>timesteps</w>
     </words>
   </dictionary>
 </component>

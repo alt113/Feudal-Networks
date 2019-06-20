@@ -1,39 +1,34 @@
+"""
+    ######################################################################################################
+    #                                    LSTM Network policy script                                      #
+    ######################################################################################################
+"""
+
+
 import tensorflow as tf
-
-from scripts.training.feudal_networks.models.models import (linear, conv2d, build_lstm,
-    normalized_columns_initializer)
+from scripts.training.feudal_networks.models.models import (linear, conv2d, build_lstm, normalized_columns_initializer)
 import scripts.training.feudal_networks.policies.policy_utils as policy_utils
-
 from scripts.training.feudal_networks.policies.configs.lstm_config import config
 
-class LSTMPolicy(object):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class LSTMPolicy(object):
+    """
+    Policy of the Feudal network architecture.
+
     """
 
     def __init__(self, obs_space, act_space,global_step):
-        """Create a Gym environment by passing environment id.
+        """
+         Instantiate an LSTM policy object.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        obs_space : object
+            Observation space
+        act_space : object
+            Action space
+        global_step : object
+            Global step defined for Feudal Network
         """
         self.global_step = global_step
         self.obs_space = obs_space
@@ -109,68 +104,54 @@ class LSTMPolicy(object):
         self.summary_op = tf.summary.merge_all()
 
     def get_initial_features(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to get the initial state features of the LSTM network
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         return self.state_init
 
     def act(self, ob, c, h):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to allow the LSTM Network to start acting based on the environmental
+        observations.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        ob : object
+            Observation object
+        c : object
+            Cost
+        h : object
+            Internal state of the LSTM network
         """
         sess = tf.get_default_session()
         return sess.run([self.sample, self.vf] + self.state_out,
                         {self.obs: [ob], self.state_in[0]: c, self.state_in[1]: h})
 
     def value(self, ob, c, h):
-        """Create a Gym environment by passing environment id.
+        """
+        Value function for the LSTM Network
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
+        ob : object
+            Observation object
+        c : object
             BLANK
-        kwargs : dict
-            BLANK
+        h : object
+            Internal state of the LSTM Network
         """
         sess = tf.get_default_session()
         return sess.run(self.vf, {self.obs: [ob], self.state_in[0]: c, self.state_in[1]: h})[0]
 
     def update_batch(self,batch):
-        """Create a Gym environment by passing environment id.
+        """
+        Function to efficiently update the batch of data in the LSTM Network.
+        It does so by just directly returning the batch object parameter passed.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        batch : object
+            Batch object
         """
         return batch
