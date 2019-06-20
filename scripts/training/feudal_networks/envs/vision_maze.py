@@ -1,36 +1,31 @@
+"""
+    ######################################################################################################
+    #               The purpose of this script is to envision the Maze environment                       #
+    ######################################################################################################
+"""
+
 
 import gym
 from gym import spaces
 import numpy as np
 
-class VisionMazeEnv(gym.Env):
-    """Create a Gym environment by passing environment id.
 
-    Parameters
-    ----------
-    env_id : str
-        environment id to be registered in Gym
-    client_id : str
-        Client ID
-    remotes : str
-        BLANK
-    kwargs : dict
-        BLANK
+class VisionMazeEnv(gym.Env):
+    """
+    Used to envision the Maze environment in Gym.
+
     """
 
     def __init__(self, room_length=3, num_rooms_per_side=2):
-        """Create a Gym environment by passing environment id.
+        """
+        Instantiate the vision maze environment
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        room_length : int
+            length of the room in the maze
+        num_rooms_per_side : int
+            number of rooms per side in maze
         """
         assert room_length % 2 == 1, "room_length must be odd"
         assert room_length >= 3, "room_length must be greater than 3"
@@ -49,36 +44,18 @@ class VisionMazeEnv(gym.Env):
         self._reset()
 
     def _get_obs(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to get observations in environment
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         self._obs.fill(0)
         self._obs[self.state[0], self.state[1], :] = 1
         return self._obs
 
     def _reset(self):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help reset the environment.
 
-        Parameters
-        ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
         """
         # start in random state in the maze
         x = np.random.randint(self.max_pos)
@@ -87,18 +64,13 @@ class VisionMazeEnv(gym.Env):
         return self._get_obs()
 
     def _step(self, a):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help advance the step movement in maze.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        a : object
+            action object
         """
         assert self.action_space.contains(a)
         x, y = self.state
@@ -124,18 +96,15 @@ class VisionMazeEnv(gym.Env):
         return self._get_obs(), r, done, {}
 
     def _step_up(self, x, y):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help take a step up.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        x : int
+            x-coordinate of upward step
+        y : int
+            y-coordinate of upward step
         """
         ny = y + 1
 
@@ -153,18 +122,15 @@ class VisionMazeEnv(gym.Env):
         return ny
 
     def _step_right(self, x, y):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help take a step to the right.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        x : int
+            x-coordinate of rightward step
+        y : int
+            y-coordinate of rightward step
         """
         nx = x + 1
 
@@ -182,18 +148,15 @@ class VisionMazeEnv(gym.Env):
         return nx
 
     def _step_down(self, x, y):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help take a step down.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        x : int
+            x-coordinate of downward step
+        y : int
+            y-coordinate of downward step
         """
         ny = y - 1
 
@@ -211,18 +174,15 @@ class VisionMazeEnv(gym.Env):
         return ny
 
     def _step_left(self, x, y):
-        """Create a Gym environment by passing environment id.
+        """
+        Private utility function to help take a step to the left.
 
         Parameters
         ----------
-        env_id : str
-            environment id to be registered in Gym
-        client_id : str
-            Client ID
-        remotes : str
-            BLANK
-        kwargs : dict
-            BLANK
+        x : int
+            x-coordinate of leftward step
+        y : int
+            y-coordinate of leftward step
         """
         nx = x - 1
 
